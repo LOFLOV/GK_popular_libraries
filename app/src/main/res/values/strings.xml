@@ -1,3 +1,7 @@
 <resources>
-    <string name="app_name">GK_Popular_libraries</string>
+    <string name="app_name">popular_arch_geek_brains</string>
+    <string name="counter_one">counter 1</string>
+    <string name="counter_three">counter 3</string>
+    <string name="counter_two">counter 2</string>
+    <string name="_0">0</string>
 </resources>
