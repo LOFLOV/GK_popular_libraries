@@ -1,21 +1,22 @@
 package com.android.gk_popular_libraries
 
-class CountersPresenter(private val view: MainView) {
+import moxy.InjectViewState
+import moxy.MvpPresenter
 
-    private val model = CountersModel()
+@InjectViewState
+class CountersPresenter(
+    private val model: CountersModel
+) : MvpPresenter<MainView>() {
 
     fun onCLickFirstButton(index: Int) {
-        val nextValue = model.next(index)
-        view.setTextFirstBtn(nextValue.toString())
+        viewState.setTextFirstBtn(model.next(index).toString())
     }
 
     fun onClickSecondButton(index: Int) {
-        val nextValue = model.next(index)
-        view.setTextSecondBtn(nextValue.toString())
+        viewState.setTextSecondBtn(model.next(index).toString())
     }
 
     fun onClickThirdButton(index: Int) {
-        val nextValue = model.next(index)
-        view.setTextThirdBtn(nextValue.toString())
+        viewState.setTextThirdBtn(model.next(index).toString())
     }
 }

@@ -4,16 +4,15 @@ class CountersModel {
 
     private val counters = mutableListOf(0, 0, 0)
 
-    private fun getCurrent(index: Int): Int {
-        return counters[index]
+    private fun getCurrent(position: Int): Int {
+        return counters[position]
     }
 
-    fun next(index: Int): Int {
-        counters[index]++
-        return getCurrent(index)
+    fun next(position: Int): Int {
+        return counters[position]++
     }
 
-    fun set(index: Int, value: Int) {
-        counters[index] = value
+    fun set(position: Int, value: Int) {
+        counters[position] = value
     }
 }

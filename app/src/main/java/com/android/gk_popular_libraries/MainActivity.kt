@@ -1,14 +1,15 @@
 package com.android.gk_popular_libraries
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import com.android.gk_popular_libraries.databinding.ActivityMainBinding
+import moxy.MvpAppCompatActivity
+import moxy.ktx.moxyPresenter
 
 
-class MainActivity : AppCompatActivity(), MainView {
+class MainActivity : MvpAppCompatActivity(), MainView {
 
     private lateinit var binding: ActivityMainBinding
-    private val presenter = CountersPresenter(this)
+    private val presenter by moxyPresenter { CountersPresenter(CountersModel())  }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -22,15 +23,15 @@ class MainActivity : AppCompatActivity(), MainView {
         }
     }
 
-    override fun setTextFirstBtn(text: String) {
-        binding.btnCounter1.text = text
+    override fun setTextFirstBtn(counter: String) {
+        binding.btnCounter1.text = counter
     }
 
-    override fun setTextSecondBtn(text: String) {
-        binding.btnCounter2.text = text
+    override fun setTextSecondBtn(counter: String) {
+        binding.btnCounter2.text = counter
     }
 
-    override fun setTextThirdBtn(text: String) {
-        binding.btnCounter3.text = text
+    override fun setTextThirdBtn(counter: String) {
+        binding.btnCounter3.text = counter
     }
 }
