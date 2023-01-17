@@ -1,9 +1,12 @@
 package com.android.gk_popular_libraries.user
 
+import android.util.Log
 import com.android.gk_popular_libraries.navigation.DetailsScreen
 import com.android.gk_popular_libraries.repository.interfaces.GithubRepository
+import com.android.gk_popular_libraries.utils.subscribeByDefault
 import com.github.terrakok.cicerone.Router
 import moxy.MvpPresenter
+
 
 class UserPresenter(
     private val repository: GithubRepository,
@@ -12,7 +15,17 @@ class UserPresenter(
 
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
-        viewState.initList(repository.getUsers())
+        viewState.showLoading()
+        repository.getUsers()
+            .subscribeByDefault()
+            .subscribe(
+                {
+                    viewState.initList(it)
+                    viewState.hideLoading()
+                }, {
+                    Log.e("AAA", it.message.toString())
+                }
+            )
     }
 
     fun onItemClicked(id: Long) {

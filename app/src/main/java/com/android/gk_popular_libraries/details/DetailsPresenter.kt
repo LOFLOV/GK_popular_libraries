@@ -1,7 +1,9 @@
 package com.android.gk_popular_libraries.details
 
+import android.util.Log
 import com.android.gk_popular_libraries.navigation.UsersScreen
 import com.android.gk_popular_libraries.repository.interfaces.GithubRepository
+import com.android.gk_popular_libraries.utils.subscribeByDefault
 import com.github.terrakok.cicerone.Router
 import moxy.MvpPresenter
 
@@ -11,10 +13,15 @@ class DetailsPresenter(
 ) : MvpPresenter<DetailsView>() {
 
     fun loadUser(id: Long) {
-        val user = repository.getUserById(id)
-        if (user != null) {
-            viewState.show(user)
-        }
+        repository.getUserById(id)
+            .subscribeByDefault()
+            .subscribe(
+                {
+                    viewState.show(it)
+                }, {
+                    Log.e("@@@", it.message.toString())
+                }
+            )
     }
 
     fun onBackPressed(): Boolean {
